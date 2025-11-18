@@ -4,6 +4,9 @@ import { Header } from './header/header';
 import { Sidebar } from './sidebar/sidebar';
 import { RouterModule } from '@angular/router';
 import { Modal } from './modal/modal';
+ 
+import { MainLayout } from './main-layout/main-layout';
+import { AuthLayout } from './auth-layout/auth-layout';
 
 
 
@@ -11,7 +14,9 @@ import { Modal } from './modal/modal';
   declarations: [
     Header,
     Sidebar,
-    Modal
+    Modal, 
+    MainLayout, 
+    AuthLayout
   ],
   imports: [
     CommonModule,RouterModule
@@ -19,7 +24,9 @@ import { Modal } from './modal/modal';
   exports: [
     Header,
     Sidebar,
-    Modal
+    Modal, 
+    MainLayout,
+    AuthLayout
   ]
 })
 export class SharedModule { }

@@ -6,7 +6,11 @@ import { Invoices } from './invoices/invoices';
 import { Settings } from './settings/settings';
 import { FormsModule } from '@angular/forms';
 import { SharedModule } from '../shared/shared-module';
-
+import { provideCharts, withDefaultRegisterables } from 'ng2-charts';
+import { BaseChartDirective } from 'ng2-charts';
+import { Login } from './login/login';
+ 
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 
 @NgModule({
@@ -14,18 +18,26 @@ import { SharedModule } from '../shared/shared-module';
     Dashboard,
     Customers,
     Invoices,
-    Settings
+    Settings,
+    Login 
   ],
   imports: [
     CommonModule,
     FormsModule,
-    SharedModule
+    SharedModule,
+    BaseChartDirective
+  ],
+    providers: [
+    // ⭐ VERY IMPORTANT ⭐
+    provideCharts(withDefaultRegisterables())
   ],
   exports: [
     Dashboard,
     Customers,
     Invoices,
-    Settings
-  ]
+    Settings,
+    Login
+  ],
+   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class ModulesModule { }
