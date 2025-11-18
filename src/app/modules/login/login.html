@@ -1,0 +1,130 @@
+<div class="login-page-wrapper">    
+
+<!-- Background Particles -->
+<div id="particles-js"></div>
+
+<!-- Page Container -->
+<div class="auth-container" [class.light]="isLightMode">
+
+  <!-- Dark/Light Toggle -->
+  <div class="theme-toggle" (click)="toggleTheme()">
+    <i class="ti" [ngClass]="isLightMode ? 'ti-moon' : 'ti-sun'"></i>
+  </div>
+
+  <!-- Auth Box -->
+  <div class="auth-box">
+
+    <!-- Lottie Animation -->
+    <div class="lottie-box">
+      <lottie-player
+        src="https://assets6.lottiefiles.com/packages/lf20_5ngs2ksb.json"
+        background="transparent"
+        speed="1"
+        class="lottie"
+        loop
+        autoplay>
+      </lottie-player>
+    </div>
+
+    <!-- Header -->
+    <div class="auth-header">
+      <h2>Welcome Back</h2>
+      <p class="subtitle">Sign in to continue</p>
+    </div>
+
+    <!-- Login Form -->
+    <form (ngSubmit)="login()" class="auth-form" #f="ngForm">
+
+      <!-- Email -->
+      <div class="input-group">
+        <i class="icon ti ti-mail"></i>
+        <input
+          type="email"
+          [(ngModel)]="email"
+          name="email"
+          required
+          email
+          placeholder=" " #emailCtrl="ngModel" />
+        <label>Email</label>
+      </div>
+
+      <div class="validation" *ngIf="emailCtrl.invalid && emailCtrl.touched">
+        <span *ngIf="emailCtrl.errors?.['required']">Email is required.</span>
+        <span *ngIf="emailCtrl.errors?.['email']">Enter a valid email.</span>
+      </div>
+
+      <!-- Password -->
+      <div class="input-group">
+        <i class="icon ti ti-lock"></i>
+        <input
+          [type]="showPassword ? 'text' : 'password'"
+          [(ngModel)]="password"
+          name="password"
+          required
+          minlength="6"
+          (input)="checkPasswordStrength()"
+          placeholder=" "
+          #passCtrl="ngModel" />
+        <label>Password</label>
+
+        <i class="toggle ti"
+           [ngClass]="showPassword ? 'ti-eye-off' : 'ti-eye'"
+           (click)="togglePassword()">
+        </i>
+      </div>
+
+      <div class="validation" *ngIf="passCtrl.invalid && passCtrl.touched">
+        <span *ngIf="passCtrl.errors?.['required']">Password is required.</span>
+        <span *ngIf="passCtrl.errors?.['minlength']">Min 6 characters required.</span>
+      </div>
+
+      <!-- Password Strength -->
+      <div class="strength-container" *ngIf="password.length">
+        <div class="strength-bar" [ngClass]="passwordStrength"></div>
+        <p class="strength-text">{{ strengthLabel }}</p>
+      </div>
+
+      <!-- Remember + Forgot -->
+      <div class="options-row">
+        <label class="remember">
+          <input type="checkbox" [(ngModel)]="rememberMe" name="rememberMe" />
+          Remember Me
+        </label>
+        <a class="forgot" (click)="openForgotPassword()">Forgot Password?</a>
+      </div>
+
+      <!-- Error -->
+      <div class="error" *ngIf="error">{{ error }}</div>
+
+      <!-- Login Button -->
+      <button class="btn-gradient" type="submit" [disabled]="f.invalid">
+        Login
+      </button>
+
+      <!-- Google Button -->
+      <button class="btn-google" type="button" (click)="loginWithGoogle()">
+        <img src="https://www.svgrepo.com/show/475656/google-color.svg" />
+        Continue with Google
+      </button>
+    </form>
+
+    <!-- Forgot Password Modal -->
+    <div class="modal-bg" *ngIf="showForgotModal">
+      <div class="modal">
+        <h3>Reset Password</h3>
+        <p>Enter your email for reset instructions.</p>
+
+        <input type="email" [(ngModel)]="resetEmail" placeholder="Email" />
+
+        <button class="btn-primary" (click)="sendResetLink()">Send Link</button>
+        <button class="btn-secondary" (click)="closeForgotPassword()">Cancel</button>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <p class="footer-text">
+      © {{ currentYear }} SaaS Billing System
+    </p>
+  </div>
+</div>
+</div>

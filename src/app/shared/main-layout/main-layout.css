@@ -1,0 +1,18 @@
+/* Flex layout between sidebar and main content */
+.main {
+  display: flex;
+  height: calc(100vh - 64px); /* header height */
+}
+
+/* Sidebar already has its own styling */
+app-sidebar {
+  width: 240px; /* adjust based on your real sidebar */
+  flex-shrink: 0;
+}
+
+/* Main content */
+.content {
+  flex: 1;
+  padding: 24px;
+  overflow-y: auto;
+}

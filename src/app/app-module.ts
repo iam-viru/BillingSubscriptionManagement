@@ -28,7 +28,10 @@ import { provideCharts, withDefaultRegisterables } from 'ng2-charts';
       useClass: TokenInterceptor,
       multi: true
     },
-    provideBrowserGlobalErrorListeners() 
+    provideBrowserGlobalErrorListeners(),
+
+   
+    provideCharts(withDefaultRegisterables())
   ],
   bootstrap: [App]
 })
